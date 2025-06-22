@@ -12,7 +12,7 @@ public interface ProductService {
     void createProduct(Product product);
 
     // 更新商品价格
-    void updatePrice(Long id, BigDecimal newPrice);
+    Product updatePrice(Long id, BigDecimal newPrice);
 
     // 删除商品
     void deleteProduct(Long id);

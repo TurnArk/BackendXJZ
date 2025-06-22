@@ -29,21 +29,23 @@ public class ProductServiceImpl implements ProductService {
     // 新建商品
     @Override
     @Transactional
-    public void createProduct(Product product)throws MyExceptio {
+    public void createProduct(Product product){
+
         productMapper.insertProduct(product);
     }
 
     // 更新商品价格
     @Override
     @Transactional
-    public void updatePrice(Long id, BigDecimal newPrice) throws MyExceptio {
+    public Product updatePrice(Long id, BigDecimal newPrice)  {
         productMapper.updateProductPrice(id, newPrice);
+        return null;
     }
 
     // 删除商品
     @Override
     @Transactional
-    public void deleteProduct(Long id) throws MyExceptio{
+    public void deleteProduct(Long id) {
         productMapper.deleteProductById(id);
     }
 }
