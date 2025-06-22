@@ -1,7 +1,10 @@
 package com.zhtang.miaosha.service;
 
+import com.zhtang.miaosha.pojo.PageResult;
 import com.zhtang.miaosha.pojo.Product;
 import com.zhtang.miaosha.common.exception.MyException;
+import com.zhtang.miaosha.pojo.dto.ProductPageQueryDTO;
+
 import java.math.BigDecimal;
 
 public interface ProductService {
@@ -16,4 +19,6 @@ public interface ProductService {
 
     // 删除商品
     void deleteProduct(Long id);
+
+    PageResult listProduct(ProductPageQueryDTO productPageQueryDTO);
 }

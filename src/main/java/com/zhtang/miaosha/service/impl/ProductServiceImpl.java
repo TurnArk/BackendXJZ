@@ -1,13 +1,18 @@
 package com.zhtang.miaosha.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.zhtang.miaosha.mapper.ProductMapper;
+import com.zhtang.miaosha.pojo.PageResult;
 import com.zhtang.miaosha.pojo.Product;
+import com.zhtang.miaosha.pojo.dto.ProductPageQueryDTO;
+import com.zhtang.miaosha.pojo.vo.ProductVO;
 import com.zhtang.miaosha.service.ProductService;
 import com.zhtang.miaosha.common.exception.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.zhtang.miaosha.common.Status
+import com.zhtang.miaosha.common.Status;
 import java.math.BigDecimal;
 
 @Service
@@ -47,5 +52,12 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void deleteProduct(Long id) {
         productMapper.deleteProductById(id);
+    }
+
+    @Override
+    public PageResult listProduct(ProductPageQueryDTO productPageQueryDTO) {
+        PageHelper.startPage(productPageQueryDTO.getPage(), productPageQueryDTO.getPageSize());
+        Page<ProductVO> page = productMapper.listProduct(productPageQueryDTO);
+        return new PageResult(page.getTotal(), page.getResult());
     }
 }
