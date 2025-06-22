@@ -1,7 +1,7 @@
 package com.zhtang.miaosha.controller;
 
 import com.zhtang.miaosha.exception.MyException;
-import com.zhtang.miaosha.model.Orders;
+import com.zhtang.miaosha.pojo.Orders;
 import com.zhtang.miaosha.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

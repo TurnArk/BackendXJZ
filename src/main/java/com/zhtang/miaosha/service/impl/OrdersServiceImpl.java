@@ -2,7 +2,7 @@ package com.zhtang.miaosha.service.impl;
 
 import com.zhtang.miaosha.exception.MyException;
 import com.zhtang.miaosha.mapper.OrdersMapper;
-import com.zhtang.miaosha.model.Orders;
+import com.zhtang.miaosha.pojo.Orders;
 import com.zhtang.miaosha.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

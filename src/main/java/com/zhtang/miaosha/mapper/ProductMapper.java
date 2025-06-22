@@ -1,6 +1,6 @@
 package com.zhtang.miaosha.mapper;
 
-import com.zhtang.miaosha.model.Product;
+import com.zhtang.miaosha.pojo.Product;
 import org.apache.ibatis.annotations.Mapper;
 import java.math.BigDecimal;
 

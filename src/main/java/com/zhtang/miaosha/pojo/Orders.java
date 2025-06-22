@@ -1,4 +1,4 @@
-package com.zhtang.miaosha.model;
+package com.zhtang.miaosha.pojo;
 
 import lombok.Data;
 

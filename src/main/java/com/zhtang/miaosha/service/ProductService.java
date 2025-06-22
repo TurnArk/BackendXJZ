@@ -1,6 +1,6 @@
 package com.zhtang.miaosha.service;
 
-import com.zhtang.miaosha.model.Product;
+import com.zhtang.miaosha.pojo.Product;
 
 import java.math.BigDecimal;
 

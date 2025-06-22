@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhtang.miaosha.mapper.OrdersMapper">
-    <resultMap id = "OrdersMapper" type="com.zhtang.miaosha.model.Orders">
+    <resultMap id = "OrdersMapper" type="com.zhtang.miaosha.pojo.Orders">
         <id column="id" property="id"/>
         <result column="product_id" property="productId"/>
         <result column="amount" property="amout"/>
@@ -14,12 +14,12 @@
     </select>
 
     <!-- 插入 -->
-    <insert id="insertOrder" parameterType="com.zhtang.miaosha.model.Orders" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertOrder" parameterType="com.zhtang.miaosha.pojo.Orders" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders(product_id, amount) VALUES(#{productId}, #{amount})
     </insert>
 
     <!-- 更新 -->
-    <update id="updateOrderAmount" parameterType="com.zhtang.miaosha.model.Orders">
+    <update id="updateOrderAmount" parameterType="com.zhtang.miaosha.pojo.Orders">
         UPDATE orders SET amount = #{amount} WHERE id = #{id}
     </update>
 

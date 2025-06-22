@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhtang.miaosha.mapper.ProductMapper">
-    <resultMap id="BaseResultMap" type="com.zhtang.miaosha.model.Product">
+    <resultMap id="BaseResultMap" type="com.zhtang.miaosha.pojo.Product">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="price" property="price"/>
@@ -16,7 +16,7 @@
     </select>
 
     <!-- 新建 -->
-    <insert id="insertProduct" parameterType="com.zhtang.miaosha.model.Product" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertProduct" parameterType="com.zhtang.miaosha.pojo.Product" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO product(name, price, stock, pic)
         VALUES (#{name}, #{price}, #{stock}, #{pic})
     </insert>

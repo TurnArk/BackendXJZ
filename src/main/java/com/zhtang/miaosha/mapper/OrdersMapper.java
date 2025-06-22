@@ -1,8 +1,7 @@
 package com.zhtang.miaosha.mapper;
 
-import com.zhtang.miaosha.model.Orders;
+import com.zhtang.miaosha.pojo.Orders;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface OrdersMapper {

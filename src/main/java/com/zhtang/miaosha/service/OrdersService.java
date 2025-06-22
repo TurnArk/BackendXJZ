@@ -1,7 +1,6 @@
 package com.zhtang.miaosha.service;
 
-import com.zhtang.miaosha.model.Orders;
-import org.springframework.transaction.annotation.Transactional;
+import com.zhtang.miaosha.pojo.Orders;
 
 public interface OrdersService {
     // 获取秒杀订单信息

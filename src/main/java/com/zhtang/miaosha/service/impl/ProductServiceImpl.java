@@ -1,7 +1,7 @@
 package com.zhtang.miaosha.service.impl;
 
 import com.zhtang.miaosha.mapper.ProductMapper;
-import com.zhtang.miaosha.model.Product;
+import com.zhtang.miaosha.pojo.Product;
 import com.zhtang.miaosha.service.ProductService;
 import com.zhtang.miaosha.exception.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
