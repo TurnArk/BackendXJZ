@@ -1,12 +1,12 @@
 package com.zhtang.miaosha.service;
 
 import com.zhtang.miaosha.pojo.Product;
-
+import com.zhtang.miaosha.common.exception.MyException;
 import java.math.BigDecimal;
 
 public interface ProductService {
     // 查询
-    Product getProduct(Long id);
+    Product getProduct(Long id) throws MyException;
 
     // 新建商品
     void createProduct(Product product);

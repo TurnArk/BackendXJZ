@@ -1,17 +1,18 @@
 package com.zhtang.miaosha.service;
 
+import com.zhtang.miaosha.common.exception.MyException;
 import com.zhtang.miaosha.pojo.Orders;
 
 public interface OrdersService {
     // 获取秒杀订单信息
-    Orders getOrder(Long id);
+    Orders getOrder(Long id) throws MyException;
 
     // 新建秒杀订单
-    void createOrder(Orders order);
+    void createOrder(Orders order) throws MyException;
 
     // 更新秒杀订单信息
-    void updateOrder(Orders order);
+    void updateOrder(Orders order) throws MyException;
 
     // 删除秒杀订单
-    void deleteOrder(Long id);
+    void deleteOrder(Long id) throws MyException;
 }
