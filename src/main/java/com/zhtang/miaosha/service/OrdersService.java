@@ -8,11 +8,11 @@ public interface OrdersService {
     Orders getOrder(Long id) throws MyException;
 
     // 新建秒杀订单
-    void createOrder(Orders order) throws MyException;
+    Orders createOrder(Orders order) throws MyException;
 
     // 更新秒杀订单信息
-    void updateOrder(Orders order) throws MyException;
+    Orders updateOrder(Orders order) throws MyException;
 
     // 删除秒杀订单
-    void deleteOrder(Long id) throws MyException;
+    Orders deleteOrder(Long id) throws MyException;
 }

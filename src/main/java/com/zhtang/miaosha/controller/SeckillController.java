@@ -7,6 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 订单模块功能
+ * 1.查询单个订单
+ * 2.新建订单
+ * 3.更新订单
+ * 4.删除订单
+ */
 @RestController
 @RequestMapping("/seckill")
 public class SeckillController {

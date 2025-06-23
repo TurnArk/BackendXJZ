@@ -9,11 +9,11 @@ public interface ProductService {
     Product getProduct(Long id) throws MyException;
 
     // 新建商品
-    void createProduct(Product product);
+    Product createProduct(Product product);
 
     // 更新商品价格
     Product updatePrice(Long id, BigDecimal newPrice);
 
     // 删除商品
-    void deleteProduct(Long id);
+    Product deleteProduct(Long id);
 }
