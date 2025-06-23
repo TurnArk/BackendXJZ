@@ -2,13 +2,18 @@ package com.zhtang.miaosha.controller;
 
 import com.zhtang.miaosha.common.Result;
 import com.zhtang.miaosha.common.exception.MyException;
+import com.zhtang.miaosha.pojo.PageResult;
 import com.zhtang.miaosha.pojo.Product;
+import com.zhtang.miaosha.pojo.ResponseMessage;
+import com.zhtang.miaosha.pojo.dto.ProductPageQueryDTO;
 import com.zhtang.miaosha.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 商品模块功能
@@ -32,6 +37,12 @@ public class ProductController {
         return Result.success(productService.getProduct(product.getId()));
     }
 
+    // 分页查询所有商品
+    @GetMapping("/list")
+    public Result<PageResult> listProduct(ProductPageQueryDTO productPageQueryDTO) {
+        PageResult pageResult = productService.listProduct(productPageQueryDTO);
+        return  Result.success(pageResult);
+    }
 
     // 新建商品
     @PostMapping

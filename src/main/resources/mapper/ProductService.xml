@@ -14,6 +14,15 @@
     <select id="getProductById" parameterType="long" resultMap="BaseResultMap">
         SELECT * FROM product WHERE id = #{id}
     </select>
+    <select id="listProduct" resultType="com.zhtang.miaosha.pojo.vo.ProductVO">
+        SELECT * FROM product
+        <where>
+            <if test="name != null">
+                AND name LIKE CONCAT('%', #{name}, '%')
+            </if>
+        </where>
+        ORDER BY id DESC
+    </select>
 
     <!-- 新建 -->
     <insert id="insertProduct" parameterType="com.zhtang.miaosha.pojo.Product" useGeneratedKeys="true" keyProperty="id">
