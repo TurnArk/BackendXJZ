@@ -14,7 +14,7 @@
     <select id="getProductById" parameterType="long" resultMap="BaseResultMap">
         SELECT * FROM product WHERE id = #{id}
     </select>
-    <select id="listProduct" resultType="com.zhtang.miaosha.pojo.vo.ProductVO">
+    <select id="listProduct" resultType="com.zhtang.miaosha.pojo.Product">
         SELECT * FROM product
         <where>
             <if test="name != null">

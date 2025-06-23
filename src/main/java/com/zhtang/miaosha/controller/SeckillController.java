@@ -32,9 +32,9 @@ public class SeckillController {
 
     // 新建秒杀订单
     @PostMapping
-    public Result<String> createOrder(@RequestBody Orders order) throws MyException {
-        ordersService.createOrder(order);
-        return Result.success();
+    public Result<Orders> createOrder(@RequestBody Orders order) throws MyException {
+        Orders createdOrder = ordersService.createOrder(order);
+        return Result.success(createdOrder);
     }
 
     // 更新秒杀订单信息

@@ -6,7 +6,6 @@ import com.zhtang.miaosha.mapper.ProductMapper;
 import com.zhtang.miaosha.pojo.PageResult;
 import com.zhtang.miaosha.pojo.Product;
 import com.zhtang.miaosha.pojo.dto.ProductPageQueryDTO;
-import com.zhtang.miaosha.pojo.vo.ProductVO;
 import com.zhtang.miaosha.service.ProductService;
 import com.zhtang.miaosha.common.exception.MyException;
 import lombok.extern.slf4j.Slf4j;
@@ -36,13 +35,14 @@ public class ProductServiceImpl implements ProductService {
     // 新建商品
     @Transactional
     @Override
-    public boolean createProduct(Product product) throws MyException {
+    public Product createProduct(Product product) throws MyException {
         int rows = productMapper.insertProduct(product);
         if (rows <= 0) {
             log.info("添加商品失败");
             throw new MyException(Status.PRODUCT_INSERT_ERROR);
         }
-        return true;
+        // 返回插入的商品对象
+        return product;
     }
 
     // 更新商品价格
@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public PageResult listProduct(ProductPageQueryDTO productPageQueryDTO) {
         PageHelper.startPage(productPageQueryDTO.getPage(), productPageQueryDTO.getPageSize());
-        Page<ProductVO> page = productMapper.listProduct(productPageQueryDTO);
+        Page<Product> page = productMapper.listProduct(productPageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
     }
 }

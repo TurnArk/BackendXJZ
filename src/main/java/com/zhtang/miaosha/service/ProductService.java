@@ -12,7 +12,7 @@ public interface ProductService {
     Product getProduct(Long id) throws MyException;
 
     // 新建商品
-    boolean createProduct(Product product) throws MyException;
+    Product createProduct(Product product) throws MyException;
 
     // 更新商品价格
     boolean updatePrice(Long id, BigDecimal newPrice) throws MyException;

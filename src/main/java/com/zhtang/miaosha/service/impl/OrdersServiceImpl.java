@@ -31,7 +31,7 @@ public class OrdersServiceImpl implements OrdersService {
     // 新建秒杀订单
     @Transactional
     @Override
-    public boolean createOrder(Orders order) throws MyException {
+    public Orders createOrder(Orders order) throws MyException {
         int updateNum = ordersMapper.deductStock(order.getProductId());
         if (updateNum <= 0) {
             log.info("库存不足");
@@ -42,7 +42,7 @@ public class OrdersServiceImpl implements OrdersService {
             log.info("订单插入失败");
             throw new MyException(Status.ORDER_CREATE_FAILED);
         }
-        return true;
+        return order;
     }
 
     // 修改秒杀订单

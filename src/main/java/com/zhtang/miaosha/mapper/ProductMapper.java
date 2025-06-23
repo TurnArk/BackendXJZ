@@ -3,7 +3,6 @@ package com.zhtang.miaosha.mapper;
 import com.github.pagehelper.Page;
 import com.zhtang.miaosha.pojo.Product;
 import com.zhtang.miaosha.pojo.dto.ProductPageQueryDTO;
-import com.zhtang.miaosha.pojo.vo.ProductVO;
 import org.apache.ibatis.annotations.Mapper;
 import java.math.BigDecimal;
 
@@ -17,5 +16,5 @@ public interface ProductMapper {
     int insertProduct(Product product);
     int updateProductPrice(Long id, BigDecimal price);
     int deleteProductById(Long id);
-    Page<ProductVO> listProduct(ProductPageQueryDTO productPageQueryDTO);
+    Page<Product> listProduct(ProductPageQueryDTO productPageQueryDTO);
 }

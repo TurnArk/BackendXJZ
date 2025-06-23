@@ -47,9 +47,9 @@ public class ProductController {
 
     // 新建商品
     @PostMapping
-    public Result<String> createProduct(@RequestBody Product product) throws MyException {
-        productService.createProduct(product);
-        return Result.success();
+    public Result<Product> createProduct(@RequestBody Product product) throws MyException {
+        Product createdProduct = productService.createProduct(product);
+        return Result.success(createdProduct);
     }
 
     // 更新商品价格
