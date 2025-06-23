@@ -1,5 +1,7 @@
 package com.zhtang.miaosha.controller;
 
+import com.zhtang.miaosha.common.Result;
+import com.zhtang.miaosha.common.Status;
 import com.zhtang.miaosha.common.exception.MyException;
 import com.zhtang.miaosha.pojo.Orders;
 import com.zhtang.miaosha.service.OrdersService;
@@ -23,29 +25,30 @@ public class SeckillController {
 
     // 获取秒杀订单信息
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOrder(@PathVariable Long id) {
-        //todo:
-        return null;
+    public Result<Orders> getOrder(@PathVariable Long id) throws MyException{
+        Orders order = ordersService.getOrder(id); // 若为空应抛出 MyException
+        return Result.success(order);
     }
 
     // 新建秒杀订单
     @PostMapping
-    public ResponseEntity<String> createOrder(@RequestBody Orders order) {
-        //todo:
-        return null;
+    public Result<String> createOrder(@RequestBody Orders order) throws MyException {
+        ordersService.createOrder(order);
+        return Result.success();
     }
 
     // 更新秒杀订单信息
     @PutMapping
-    public ResponseEntity<String> updateOrder(@RequestBody Orders order) {
-        //todo:
-        return null;
+    public Result<String> updateOrder(@RequestBody Orders order) throws MyException {
+        ordersService.updateOrder(order);
+        return Result.success();
     }
 
     // 删除秒杀订单
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
-        //todo:
-        return null;
+    public Result<String> deleteOrder(@PathVariable Long id) throws MyException {
+        ordersService.deleteOrder(id);
+        return Result.success();
     }
 }
+

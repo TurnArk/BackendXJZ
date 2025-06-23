@@ -9,4 +9,10 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface OrdersMapper {
+    Orders getOrderById(Long id);
+    int insertOrder(Orders order);
+    int updateOrderAmount(Orders order);
+    int deleteOrderById(Long id);
+    int getStockByProductId(Long productId);
+    int deductStock(Long productId);
 }

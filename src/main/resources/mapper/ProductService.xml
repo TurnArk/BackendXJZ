@@ -26,8 +26,8 @@
 
     <!-- 新建 -->
     <insert id="insertProduct" parameterType="com.zhtang.miaosha.pojo.Product" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO product(name, price, stock, pic)
-        VALUES (#{name}, #{price}, #{stock}, #{pic})
+        INSERT INTO product(id, name, price, stock, pic)
+        VALUES (#{id}, #{name}, #{price}, #{stock}, #{pic})
     </insert>
 
     <!-- 更新价格 -->

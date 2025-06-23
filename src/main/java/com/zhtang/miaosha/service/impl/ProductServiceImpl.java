@@ -9,12 +9,14 @@ import com.zhtang.miaosha.pojo.dto.ProductPageQueryDTO;
 import com.zhtang.miaosha.pojo.vo.ProductVO;
 import com.zhtang.miaosha.service.ProductService;
 import com.zhtang.miaosha.common.exception.MyException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.zhtang.miaosha.common.Status;
 import java.math.BigDecimal;
 
+@Slf4j
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -32,26 +34,39 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // 新建商品
-    @Override
     @Transactional
-    public void createProduct(Product product){
-
-        productMapper.insertProduct(product);
+    @Override
+    public boolean createProduct(Product product) throws MyException {
+        int rows = productMapper.insertProduct(product);
+        if (rows <= 0) {
+            log.info("添加商品失败");
+            throw new MyException(Status.PRODUCT_INSERT_ERROR);
+        }
+        return true;
     }
 
     // 更新商品价格
-    @Override
     @Transactional
-    public Product updatePrice(Long id, BigDecimal newPrice)  {
-        productMapper.updateProductPrice(id, newPrice);
-        return null;
+    @Override
+    public boolean updatePrice(Long id, BigDecimal newPrice) throws MyException {
+        int updated = productMapper.updateProductPrice(id, newPrice);
+        if (updated <= 0) {
+            log.info("更新商品价格失败");
+            throw new MyException(Status.PRODUCT_NOT_FOUND);
+        }
+        return true;
     }
 
     // 删除商品
-    @Override
     @Transactional
-    public void deleteProduct(Long id) {
-        productMapper.deleteProductById(id);
+    @Override
+    public boolean deleteProduct(Long id) throws MyException {
+        int deleted = productMapper.deleteProductById(id);
+        if (deleted <= 0) {
+            log.info("删除商品失败");
+            throw new MyException(Status.PRODUCT_DELETE_ERROR);
+        }
+        return true;
     }
 
     @Override

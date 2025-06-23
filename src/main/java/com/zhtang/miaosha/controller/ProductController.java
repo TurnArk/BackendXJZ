@@ -1,10 +1,10 @@
 package com.zhtang.miaosha.controller;
 
 import com.zhtang.miaosha.common.Result;
+import com.zhtang.miaosha.common.Status;
 import com.zhtang.miaosha.common.exception.MyException;
 import com.zhtang.miaosha.pojo.PageResult;
 import com.zhtang.miaosha.pojo.Product;
-import com.zhtang.miaosha.pojo.ResponseMessage;
 import com.zhtang.miaosha.pojo.dto.ProductPageQueryDTO;
 import com.zhtang.miaosha.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,9 +32,10 @@ public class ProductController {
 
     // 查询
     @GetMapping("/{id}")
-    public Result<Product> getProduct(@RequestBody Product product) throws MyException {
-        //log.info("查询{}",Product.getProductId());
-        return Result.success(productService.getProduct(product.getId()));
+    public Result<Product> getProduct(@PathVariable Long id) throws MyException {
+        log.info("查询商品：id={}", id);
+        Product product = productService.getProduct(id);
+        return Result.success(product);
     }
 
     // 分页查询所有商品
@@ -46,22 +47,22 @@ public class ProductController {
 
     // 新建商品
     @PostMapping
-    public ResponseEntity<String> createProduct(@RequestBody Product product) {
-        //todo:
-        return null;
+    public Result<String> createProduct(@RequestBody Product product) throws MyException {
+        productService.createProduct(product);
+        return Result.success();
     }
 
     // 更新商品价格
     @PutMapping("/{id}/price")
-    public Result<Product> updatePrice(@RequestBody Product product) {
-        log.info("更新商品价格--{}", product.getPrice());
-        return Result.success(ProductService.updataPrice);
+    public Result<String> updatePrice(@PathVariable Long id, @RequestBody Product product) throws MyException {
+        productService.updatePrice(id, product.getPrice());
+        return Result.success();
     }
 
     // 删除商品
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
-        //todo:
-        return null;
+    public Result<String> deleteProduct(@PathVariable Long id) throws MyException {
+        productService.deleteProduct(id);
+        return Result.success();
     }
 }

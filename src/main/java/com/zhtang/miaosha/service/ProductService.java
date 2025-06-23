@@ -12,13 +12,13 @@ public interface ProductService {
     Product getProduct(Long id) throws MyException;
 
     // 新建商品
-    void createProduct(Product product);
+    boolean createProduct(Product product) throws MyException;
 
     // 更新商品价格
-    Product updatePrice(Long id, BigDecimal newPrice);
+    boolean updatePrice(Long id, BigDecimal newPrice) throws MyException;
 
     // 删除商品
-    void deleteProduct(Long id);
+    boolean deleteProduct(Long id) throws MyException;
 
     PageResult listProduct(ProductPageQueryDTO productPageQueryDTO);
 }

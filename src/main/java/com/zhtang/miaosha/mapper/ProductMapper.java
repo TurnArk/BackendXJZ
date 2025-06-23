@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 @Mapper
 public interface ProductMapper {
     Product getProductById(Long id);
-    void insertProduct(Product product);
-    void updateProductPrice(Long id, BigDecimal price);
-    void deleteProductById(Long id);
+    int insertProduct(Product product);
+    int updateProductPrice(Long id, BigDecimal price);
+    int deleteProductById(Long id);
     Page<ProductVO> listProduct(ProductPageQueryDTO productPageQueryDTO);
 }

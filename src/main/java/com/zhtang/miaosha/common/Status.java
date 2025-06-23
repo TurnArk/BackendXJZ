@@ -17,7 +17,11 @@ public enum Status {
     // 订单请求状态
     ORDER_NOT_NULL(400, "订单不存在"),
     ORDER_NOT_EXIST(400, "订单不存在"),
+    ORDER_STOCK_SHORTAGE(400, "库存不足"),
+    ORDER_CREATE_FAILED(400, "订单创建失败"),
     ORDER_LIST_EMPTY(400, "订单列表为空");
+
+
 
 
     private final Integer code;
