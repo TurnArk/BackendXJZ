@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.zhtang</groupId>
-    <artifactId>miaosha</artifactId>
+    <artifactId>logistics</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>miaosha</name>
-    <description>miaosha</description>
+    <name>logistics</name>
+    <description>logistics</description>
 
     <properties>
         <java.version>17</java.version>
@@ -70,6 +70,12 @@
             <version>8.0.33</version>
         </dependency>
 
+        <!-- MongoDB 驱动 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
         <!-- Druid 数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -87,6 +93,19 @@
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>3.0.3</version>
+        </dependency>
+
+        <!-- Spring Boot Starter Data Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- 使用新版本Jedis代替Lettuce（可选） -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>5.1.0</version>
         </dependency>
 
         <dependency>

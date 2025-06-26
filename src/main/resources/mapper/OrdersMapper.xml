@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.logistics.mapper.OrdersMapper">
+    <resultMap id="OrdersMap" type="com.work.logistics.entity.Orders">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="sender_name" property="senderName"/>
+        <result column="sender_phone" property="senderPhone"/>
+        <result column="sender_address" property="senderAddress"/>
+        <result column="sender_location" property="senderLocation"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_address" property="receiverAddress"/>
+        <result column="receiver_location" property="receiverLocation"/>
+        <result column="weight" property="weight"/>
+        <result column="distance" property="distance"/>
+        <result column="fee" property="fee"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="deliveryman_id" property="deliverymanId"/>
+    </resultMap>
+
+    <!-- 建立订单 -->
+    <insert id="insertOrder" parameterType="com.work.logistics.entity.Orders">
+        INSERT INTO orders (
+            id, user_id, sender_name, sender_phone, sender_address, sender_location,
+            receiver_name, receiver_phone, receiver_address, receiver_location,
+            weight, distance, fee, status, create_time
+        ) VALUES (
+                     #{id}, #{userId}, #{senderName}, #{senderPhone}, #{senderAddress}, #{senderLocation},
+                     #{receiverName}, #{receiverPhone}, #{receiverAddress}, #{receiverLocation},
+                     #{weight}, #{distance}, #{fee}, #{status}, #{createTime}
+                 )
+    </insert>
+
+    <!-- 根据 ID 查询订单 -->
+    <select id="selectById" resultMap="OrdersMap" parameterType="String">
+        SELECT * FROM orders WHERE id = #{id}
+    </select>
+
+    <!-- 更新订单 -->
+    <update id="updateOrder" parameterType="com.work.logistics.entity.Orders">
+        UPDATE orders
+        SET sender_name = #{senderName},
+            sender_phone = #{senderPhone},
+            sender_address = #{senderAddress},
+            receiver_name = #{receiverName},
+            receiver_phone = #{receiverPhone},
+            receiver_address = #{receiverAddress},
+            weight = #{weight},
+            distance = #{distance},
+            fee = #{fee},
+            status = #{status},
+            deliveryman_id = #{deliverymanId}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除订单 -->
+    <delete id="deleteById" parameterType="String">
+        DELETE FROM orders WHERE id = #{id}
+    </delete>
+
+    <!-- 更新订单状态和配送员信息 -->
+    <update id="updateOrderInfo">
+        UPDATE orders
+        SET status = #{status}
+        <if test="deliverymanId != null">
+            , deliveryman_id = #{deliverymanId}
+        </if>
+        WHERE id = #{orderId}
+    </update>
+
+</mapper>

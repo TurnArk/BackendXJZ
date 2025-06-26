@@ -1,11 +1,18 @@
 spring:
+  rabbitmq:
+    host: 81.71.96.88
+    port: 5672
+    username: ark
+    password: alice
+    virtual-host: gundam
+    connection-timeout: 60000
   data:
     redis:
-      host: 81.71.96.88
+      host: 81.71.96.88  # 新配置路径
       port: 6379
-      #password: "root"
+      password: X1234567
       database: 0
-      client-type: jedis
+      client-type: jedis # 可选：强制使用Jedis
       jedis:
         pool:
           max-active: 8
@@ -14,14 +21,6 @@ spring:
           max-wait: 2000ms
       connect-timeout: 2000ms
       timeout: 1000ms
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
 
-
-#配置Zookeeper连接信息
-zookeeper.address: 127.0.0.1:2181
+    mongodb:
+      uri: mongodb://root:pcb1234@81.71.96.88:27017/logistics-db?authSource=admin

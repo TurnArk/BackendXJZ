@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.logistics.mapper.DeliverymanMapper">
+    <resultMap id="DeliverymanMap" type="com.work.logistics.entity.Deliveryman">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+        <result column="total_orders" property="totalOrders"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 修改配送员状态 -->
+    <update id="updateStatus" parameterType="map">
+        UPDATE deliveryman
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 查询配送员状态 -->
+    <select id="getStatusById" resultType="string" parameterType="string">
+        SELECT status FROM deliveryman WHERE id = #{id}
+    </select>
+
+    <!-- 根据 ID 查询配送员完整信息 -->
+    <select id="selectById" resultMap="DeliverymanMap" parameterType="string">
+        SELECT * FROM deliveryman WHERE id = #{id}
+    </select>
+</mapper>
