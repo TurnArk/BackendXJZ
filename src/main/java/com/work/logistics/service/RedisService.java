@@ -16,21 +16,30 @@ public class RedisService {
 
     private static final int MAX_CACHE_SIZE = 3;
 
-    // 添加缓存
+    // 添加缓存，若完全相同的 PersonInfo 已存在，则不添加
     public void cachePersonInfo(String key, PersonInfo info) {
         ListOperations<String, Object> ops = redisTemplate.opsForList();
 
-        // 如果已有3条记录，移除最后一条（最旧）
-        Long size = ops.size(key);
-        if (size != null && size >= MAX_CACHE_SIZE) {
-            ops.rightPop(key);
+        // 获取所有缓存，判断是否已存在完全相同的对象
+        List<Object> cachedList = ops.range(key, 0, -1);
+        if (cachedList != null) {
+            for (Object obj : cachedList) {
+                if (info.equals(obj)) {
+                    // 已存在相同，直接返回不添加
+                    return;
+                }
+            }
         }
 
-        // 添加最新记录到最前面
-        ops.leftPush(key, info);
+        // 不存在相同，添加缓存
+        Long size = ops.size(key);
+        if (size != null && size >= MAX_CACHE_SIZE) {
+            ops.rightPop(key); // 移除最旧
+        }
+        ops.leftPush(key, info); // 添加最新
     }
 
-    // 获取缓存
+    // 获取缓存列表
     public List<Object> getPersonCache(String key) {
         return redisTemplate.opsForList().range(key, 0, -1);
     }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.work.logistics.mongo.LogisticsTrack;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class OrdersService {
@@ -46,6 +47,10 @@ public class OrdersService {
     public Orders createOrder(Orders order, String token) {
         String userId = JwtUtils.getUserId(token);
         order.setUserId(userId);
+
+        // 生成订单ID
+        String orderId = UUID.randomUUID().toString().replace("-", "");
+        order.setId(orderId);
 
         // 调用高德接口把寄件人地址转为经纬度
         String senderLoc = mapAPI.getLocation(order.getSenderAddress());
