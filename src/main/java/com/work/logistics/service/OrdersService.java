@@ -1,5 +1,6 @@
 package com.work.logistics.service;
 
+import com.work.logistics.aop.SensitiveOperation;
 import com.work.logistics.entity.Orders;
 import com.work.logistics.entity.info.PersonInfo;
 import com.work.logistics.mapper.OrdersMapper;
@@ -86,18 +87,21 @@ public class OrdersService {
     }
 
     // 修改订单（不做）
+    @SensitiveOperation("修改订单")
     public int updateOrder(Orders order) {
         order.setFee(calculateFee(order.getWeight(), order.getDistance()));
         return ordersMapper.updateOrder(order);
     }
 
     // 删除订单
+    @SensitiveOperation("删除订单")
     public int deleteOrder(String id) {
         return ordersMapper.deleteById(id);
     }
 
     // 更新订单状态，并记录轨迹
     @Transactional
+    @SensitiveOperation("更新订单状态")
     public int updateOrderStatus(String orderId, String newStatus, String location, String deliverymanId) {
         // 修改订单状态
         Orders order = ordersMapper.selectById(orderId);

@@ -1,5 +1,6 @@
 package com.work.logistics.service;
 
+import com.work.logistics.aop.SensitiveOperation;
 import com.work.logistics.mongo.PageResult;
 import com.work.logistics.utils.MapAPI;
 import org.springframework.data.domain.Page;
@@ -49,6 +50,7 @@ public class LogisticsTrackService {
     }
 
     // 删除某订单的所有轨迹记录
+    @SensitiveOperation("删除物流轨迹")
     public void deleteTracksByOrderId(String orderId) {
         repository.deleteByOrderId(orderId);
     }
