@@ -9,12 +9,17 @@ import com.work.logistics.utils.Distance;
 import com.work.logistics.utils.JwtUtils;
 import com.work.logistics.utils.MapAPI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.work.logistics.mongo.LogisticsTrack;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
+import java.util.Properties;
 import java.util.UUID;
 
 @Service
@@ -34,7 +39,6 @@ public class OrdersService {
 
     @Autowired
     private RedisService redisService;
-
 
     // 运费计算
     public Double calculateFee(Double weight, Double distance) {
@@ -113,6 +117,8 @@ public class OrdersService {
 
         // 插入 MongoDB 轨迹记录
         logisticsTrackService.addTrack(orderId, newStatus, location, deliverymanId);
+
+
         return 1;
     }
 }

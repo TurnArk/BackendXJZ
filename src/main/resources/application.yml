@@ -24,3 +24,4 @@ spring:
 
     mongodb:
       uri: mongodb://root:pcb1234@81.71.96.88:27017/logistics-db?authSource=admin
+

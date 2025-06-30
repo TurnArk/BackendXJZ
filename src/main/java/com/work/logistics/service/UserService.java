@@ -93,5 +93,10 @@ public class UserService {
         String userId = JwtUtils.getUserId(token);
         return userMapper.selectById(userId);
     }
+
+    // 获取用户信息
+    public Users getUserById(String id) {
+    	return userMapper.selectById(id);
+    }
 }
 
