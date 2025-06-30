@@ -1,10 +1,10 @@
 spring:
   rabbitmq:
-    host: 81.71.96.88
-    port: 5672
-    username: ark
-    password: alice
-    virtual-host: gundam
+#    host: 81.71.96.88
+#    port: 5672
+#    username: ark
+#    password: alice
+#    virtual-host: gundam
     connection-timeout: 60000
   data:
     redis:

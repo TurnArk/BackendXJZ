@@ -23,15 +23,6 @@ public class RabbitConfig {
     @Value("${requestRoutingKey}")
     private String requestRoutingKey;
 
-    @Value("${resultQueue}")
-    private String resultQueue;
-
-    @Value("${resultExchange}")
-    private String resultExchange;
-
-    @Value("${resultRoutingKey}")
-    private String resultRoutingKey;
-
     @Value("${virtualHost}")
     private String virtualHost;
 
@@ -70,34 +61,17 @@ public class RabbitConfig {
 
 
     @Bean
-    public FanoutExchange  requestExchange() {
-        return new FanoutExchange(requestExchange, true,  false);
+    public DirectExchange  requestExchange() {
+        return new DirectExchange(requestExchange, true,  false);
     }
 
     @Bean
     public Binding  requestBinding() {
         return BindingBuilder
                 .bind(requestQueue())
-                .to(requestExchange());
+                .to(requestExchange())
+                .with(requestRoutingKey);
     }
-
-    @Bean
-    public Queue resultQueueOne(){
-        return new Queue(resultQueue, true);
-    }
-
-    @Bean
-    public FanoutExchange  resultExchange() {
-        return new FanoutExchange(resultExchange, true,  false);
-    }
-
-    @Bean
-    public Binding  resultBinding() {
-        return BindingBuilder
-                .bind(resultQueueOne())
-                .to(resultExchange());
-    }
-
 
 }
 

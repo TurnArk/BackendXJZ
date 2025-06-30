@@ -1,13 +1,9 @@
-requestQueue: RequestQueue
-requestExchange: RequestExchange
-requestRoutingKey: Request
-
-resultQueueOne: ResultQueue
-resultExchange: ResultExchange
-resultRoutingKey: Result
+requestQueue: MailQueue
+requestExchange: MailExchange
+requestRoutingKey: mail
 
 virtualHost: gundam
-rmqHost: localhost
+rmqHost: 81.71.96.88
 rmqPort: 5672
 rmqUser: ark
 rmqPassword: alice

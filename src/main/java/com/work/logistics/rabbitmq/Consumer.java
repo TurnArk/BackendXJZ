@@ -34,7 +34,7 @@ public class Consumer {
     @Value("${mail.password}")
     private String password;
 
-    @RabbitListener(queues = "${resultQueue}")
+    @RabbitListener(queues = "${requestQueue}")
     public void receive(String orderId, String newStatus, String location, String deliverymanId){
         Orders order = ordersMapper.selectById(orderId);
 
