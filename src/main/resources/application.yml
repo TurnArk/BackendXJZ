@@ -25,3 +25,12 @@ spring:
     mongodb:
       uri: mongodb://root:pcb1234@81.71.96.88:27017/logistics-db?authSource=admin
 
+logging:
+  file:
+    name: logs/myapp.log
+  level:
+    com.work.logistics: INFO
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7

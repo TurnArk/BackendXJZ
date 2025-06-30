@@ -5,6 +5,7 @@ import com.work.logistics.entity.Orders;
 import com.work.logistics.entity.info.PersonInfo;
 import com.work.logistics.mapper.OrdersMapper;
 import com.work.logistics.mongo.LogisticsTrackRepository;
+import com.work.logistics.rabbitmq.Publish;
 import com.work.logistics.utils.Distance;
 import com.work.logistics.utils.JwtUtils;
 import com.work.logistics.utils.MapAPI;
@@ -39,6 +40,9 @@ public class OrdersService {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private Publish publish;
 
     // 运费计算
     public Double calculateFee(Double weight, Double distance) {
@@ -118,7 +122,11 @@ public class OrdersService {
         // 插入 MongoDB 轨迹记录
         logisticsTrackService.addTrack(orderId, newStatus, location, deliverymanId);
 
-
+        try {
+            publish.sendMessage(orderId, newStatus, location, deliverymanId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 1;
     }
 }
