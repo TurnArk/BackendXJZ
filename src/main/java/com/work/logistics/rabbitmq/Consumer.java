@@ -2,14 +2,17 @@ package com.work.logistics.rabbitmq;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rabbitmq.client.Channel;
 import com.work.logistics.entity.Orders;
 import com.work.logistics.mapper.OrdersMapper;
 import com.work.logistics.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 
 import javax.mail.*;
@@ -41,7 +44,7 @@ public class Consumer {
     private String password;
 
     @RabbitListener(queues = "${requestQueue}")
-    public void receive(String jsonStr){
+    public void receive(String jsonStr, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag){
 
         try{
             JsonNode json = objectMapper.readTree(jsonStr);
@@ -74,9 +77,16 @@ public class Consumer {
                 message.setText(text);
                 Transport.send(message);
                 logger.info("邮件发送成功");
+
+                channel.basicAck(deliveryTag, false);
             }catch (MessagingException e){
                 e.printStackTrace();
                 logger.error("邮件发送失败: " + e.getMessage());
+                try{
+                    channel.basicNack(deliveryTag, false, true);
+                }catch (IOException ioe){
+                    logger.error("重新放入队列数据错误: {}", ioe.getMessage());
+                }
             }
 
         }catch (IOException e){
